@@ -103,7 +103,6 @@ printf("not_Flagged Class Accuracy (F1): %f",f1)
 ## Ploting Words from files
 
 ```{r}
-par(mfrow=c(1,2))
 plotWords("response_1")
 plotWords("response_49")
 ```
