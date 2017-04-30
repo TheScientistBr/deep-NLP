@@ -1,0 +1,95 @@
+---
+title: "Deep-NLP"
+author: "Delermando Branquinho Filho"
+date: "30 de abril de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# The simple way to classify texts
+
+I developed this algorithm to classify texts quickly and with a good hit. In fact, it aims at real-time rating or the need for great performance. It is ideal for large documents, the same for the collection. It has been tested with 20 news groups and aTribuna. All with F1 above .783.
+
+## Dataset
+
+The first step is: Loading Dataset from [Kaggle](https://www.kaggle.com/samdeeplearning/deepnlp/kernels)
+
+## Loading sources and executing
+
+At this step just TF-IDF will be created
+
+```{r}
+source("createTFIDF.R")
+```
+
+## Creating centroids
+
+Loading source and creating centroids with .7 to training, .3 to test
+
+```{r}
+source("createClassCentroid.R")
+createClassCentroid()
+createFiles2Test()
+```
+
+### Classifying
+
+After training we'll classify, but before will demostrate a graphical represetation of this classification. We'll use couple of files `response_1` and `response_49`
+
+```{r}
+source("plotFiles.R")
+par(mfrow=c(1,2))
+plotFile(file1 = "response_1",wplot = TRUE,classCentroid = "flagged")
+plotFile(file1 = "response_1",wplot = TRUE,classCentroid = "not_flagged")
+
+```
+
+Just take a look about correlation of predictors, strong for not_flagged and weak for flagged, like we expected. Now, we take a look about response_49.
+
+```{r}
+ind <- which(book_words$file == "response_1")
+book_words[ind,]
+```
+
+
+
+
+```{r}
+par(mfrow=c(1,2))
+plotFile(file1 = "response_49",wplot = TRUE,classCentroid = "flagged")
+plotFile(file1 = "response_49",wplot = TRUE,classCentroid = "not_flagged")
+```
+
+Wrong decision! Now we run this test for all files and extract the acuracy from Zipf Law Algortm.
+
+```{r}
+ind <- which(book_words$file == "response_49")
+book_words[ind,]
+```
+
+**Flagged Class**
+
+```{r}
+source("iClassFile.R")
+printf <- function(...) invisible(print(sprintf(...)))
+f1 <- iClassFileAll(iclass = "flagged")[4]
+printf("Flagged Class Accuracy (F1): %f",f1)
+```
+
+
+**Not Flagged Class**
+
+```{r}
+source("iClassFile.R")
+f1 <- iClassFileAll(iclass = "not_flagged")[4]
+printf("not_Flagged Class Accuracy (F1): %f",f1)
+
+
+```
+
+
+[The Scientist](http://www.thescientist.com.br)
+
