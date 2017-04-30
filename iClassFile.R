@@ -54,7 +54,6 @@ showResults <- function(iclass = FALSE, print = FALSE) {
 # iCLassFileAll compute sucess and fails in iClassFile classification under that rules
 #
 iClassFileAll <- function(iclass = FALSE, iniFile = 0, maxFiles = 9999999, clean = TRUE) {
-        source("functions.R")
         classes <- read.csv("data/class.txt",stringsAsFactors = FALSE)
         if(iclass == FALSE) {
                 names(classes)<-"Choose one Class"
@@ -120,7 +119,6 @@ iClassFileAll <- function(iclass = FALSE, iniFile = 0, maxFiles = 9999999, clean
 
 iClassFile <- function(lfile = lfile, wplot = FALSE) {
         source("loadConfig.R")
-        source("functions.R")
         doc3 <- "none"
         rho  <- -Inf
         rhoClass <- "none"

@@ -12,11 +12,11 @@ plotWords <- function(lfile, corte = 0) {
         doc <- subset(book_words,file == lfile)
         doc <- subset(doc, tf_idf > corte)
         doc$i <- 1:length(doc$word)
-        if(dim(doc)[1] > 100)
-                doc <- doc[1:100,]
+        if(dim(doc)[1] > 50)
+                doc <- doc[1:50,]
         doc <- doc[order(doc$tf_idf,decreasing = FALSE),]
         p <- ggplot(doc, aes(i, tf_idf, label = doc$word)) + 
-                geom_text(check_overlap = TRUE,size = I(doc$tf_idf*300), aes(colour = doc$tf_idf)) +
+                geom_text(check_overlap = TRUE,size = (doc$tf_idf*100)/max(doc$tf_idf), aes(colour = doc$tf_idf)) +
                 theme(legend.position="none")
         print(p)
         corM <- lm(doc$tf_idf ~ doc$i + I(doc$i^2))

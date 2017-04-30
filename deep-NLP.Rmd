@@ -13,9 +13,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 I developed this algorithm to classify texts quickly and with a good hit. In fact, it aims at real-time rating or the need for great performance. It is ideal for large documents, the same for the collection. It has been tested with 20 news groups and aTribuna. All with F1 above .783.
 
+### Source
+
+After download the sources from:
+
+[MyGithub](https://github.com/TheScientistBr/deep-NLP)
+
+`all files and directories works fine at last time 04/30/2017 3:33 pm`
+
 ## Dataset
 
 The first step is: Loading Dataset from [Kaggle](https://www.kaggle.com/samdeeplearning/deepnlp/kernels)
+
+Credits dataset: [samdeeplearning](https://www.kaggle.com/samdeeplearning)
 
 ## Loading sources and executing
 
@@ -23,6 +33,7 @@ At this step just TF-IDF will be created
 
 ```{r}
 source("createTFIDF.R")
+head(book_words)
 ```
 
 ## Creating centroids
@@ -83,11 +94,18 @@ printf("Flagged Class Accuracy (F1): %f",f1)
 **Not Flagged Class**
 
 ```{r}
-source("iClassFile.R")
 f1 <- iClassFileAll(iclass = "not_flagged")[4]
 printf("not_Flagged Class Accuracy (F1): %f",f1)
 
 
+```
+
+## Ploting Words from files
+
+```{r}
+par(mfrow=c(1,2))
+plotWords("response_1")
+plotWords("response_49")
 ```
 
 
