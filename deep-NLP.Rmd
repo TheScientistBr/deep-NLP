@@ -2,7 +2,9 @@
 title: "Deep-NLP"
 author: "Delermando Branquinho Filho"
 date: "30 de abril de 2017"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
