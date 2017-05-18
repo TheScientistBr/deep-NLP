@@ -1,10 +1,11 @@
 ---
-title: "Deep-NLP"
+title: "Deep Learning"
 author: "Delermando Branquinho Filho"
 date: "30 de abril de 2017"
 output:
   word_document: default
   html_document: default
+subtitle: Natural Language Processing
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # The simple way to classify texts
 
-I developed this algorithm to classify texts quickly and with a good hit. In fact, it aims at real-time rating or the need for great performance. It is ideal for large documents, the same for the collection. It has been tested with 20 news groups and aTribuna. All with F1 above .783.
+I developed a neww algorithm to classify texts quickly and with a good hit. In fact, it aims at real-time rating or the need for great performance. It is ideal for large documents, the same for the collection. It has been tested with 20 news groups and aTribuna. All with F1 above .783.
 
 ### Source
 
@@ -83,6 +84,8 @@ ind <- which(book_words$file == "response_49")
 book_words[ind,]
 ```
 
+## Algorithm Accuracy
+
 **Flagged Class**
 
 ```{r}
@@ -102,11 +105,24 @@ printf("not_Flagged Class Accuracy (F1): %f",f1)
 
 ```
 
-## Ploting Words from files
+## Plotting Words from files
 
 ```{r}
-plotWords("response_1")
-plotWords("response_49")
+library("wordcloud")
+classFlagged <- read.csv("data/centroid.flagged")
+classFlagged <- classFlagged[order(classFlagged$mean,decreasing = TRUE),]
+wordcloud(classFlagged$word,classFlagged$mean, scale=c(3,.1),min.freq=0.001,
+          max.words=300, random.order=FALSE, rot.per=.35,
+          colors=brewer.pal(8,"Dark2"))
+```
+
+
+```{r}
+classFlagged <- read.csv("data/centroid.not_flagged")
+classFlagged <- classFlagged[order(classFlagged$mean,decreasing = TRUE),]
+wordcloud(classFlagged$word,classFlagged$mean, scale=c(4,.3),min.freq=0.001,
+          max.words=300, random.order=FALSE, rot.per=.15,
+          colors=brewer.pal(8,"Dark2"))
 ```
 
 
