@@ -3,7 +3,6 @@ title: "Deep Learning"
 author: "Delermando Branquinho Filho"
 date: "30 de abril de 2017"
 output:
-  word_document: default
   html_document: default
 subtitle: Natural Language Processing
 ---
